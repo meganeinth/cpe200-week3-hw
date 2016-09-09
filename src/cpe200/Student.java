@@ -12,52 +12,35 @@ public class Student {
     private int year_of_birth;
     private boolean status;
 
+    private String _default_name = "John Doe";
+    private String _default_id = "560610000";
+    private int _default_yob = 1990;
+    private boolean _default_status = false;
+
     private static final String student_id_regex="^5([6-9]?)061([0-2]?)([0-9]{3})$";
 
-    public Student(){
-        this.student_name = "John Doe";
-        this.student_id = "560610000";
-        this.year_of_birth = 1990;
-        this.status = false;
-    }
+    public Student(){ this("","",0,false); }
 
-    public Student(String name,String id) {
-        this.student_name = name;
-        if(this.isValidStudent_id(id)){
-            this.student_id = id;
-        }else{
-            this.student_id = "560610000";
-        }
-        this.year_of_birth = 1990;
-        this.status = false;
-    }
+    public Student(String name,String id) { this(name,id,0,false); }
 
-    public Student(String name,String id,int year) {
-        this.student_name = name;
-        if(this.isValidStudent_id(id)){
-            this.student_id = id;
-        }else{
-            this.student_id = "560610000";
-        }
-        if(this.isValidYOB(year)) {
-            this.year_of_birth = year;
-        }else{
-            this.year_of_birth = 1990;
-        }
-        this.status = false;
-    }
+    public Student(String name,String id,int year) { this(name,id,year,false); }
 
     public Student(String name,String id,int year,boolean status) {
-        this.student_name = name;
+        if(!name.equalsIgnoreCase("")){
+            this.student_name = name;
+        }else{
+            this.student_name = this._default_name;
+        }
+
         if(this.isValidStudent_id(id)){
             this.student_id = id;
         }else{
-            this.student_id = "560610000";
+            this.student_id = this._default_id;
         }
         if(this.isValidYOB(year)) {
             this.year_of_birth = year;
         }else{
-            this.year_of_birth = 1990;
+            this.year_of_birth = this._default_yob;
         }
         this.status = status;
     }

@@ -15,35 +15,39 @@ public class Course {
     private int max_students;
     private int no_students;
 
-    public Course() {
-        this.course_name = "TBA";
-        this.course_id = "000000";
-        this.lecturer = "TBA";
-        this.max_students = 30;
-        this.no_students = 0;
-    }
+    private String _default_course_name = "TBA";
+    private String _default_course_id = "000000";
+    private String _defautl_lecturer = "TBA";
+    private int _default_max_students = 30;
+    private int _defautl_no_students  = 0;
 
-    public Course(String n, String cid) {
-        this.course_name = n;
-        this.course_id = cid;
-        this.lecturer = "TBA";
-        this.max_students = 30;
-        this.no_students = 0;
-    }
+    public Course() { this("","","",0); }
 
-    public Course(String n, String cid, String l) {
-        this.course_name = n;
-        this.course_id = cid;
-        this.lecturer = l;
-        this.max_students = 30;
-        this.no_students = 0;
-    }
+    public Course(String n, String cid) { this(n,cid,"",0); }
+
+    public Course(String n, String cid, String l) { this(n,cid,l,0); }
 
     public Course(String n, String cid, String l, int max) {
-        this.course_name = !n.equalsIgnoreCase("")?n:"TBA";
-        this.course_id = cid;
-        this.lecturer = l;
-        this.max_students = max;
+        if(!n.equalsIgnoreCase("")) {
+            this.course_name = n;
+        }else{
+            this.course_name = this._default_course_name;
+        }
+        if(!cid.equalsIgnoreCase("")) {
+            this.course_id = cid;
+        }else{
+            this.course_id = this._default_course_id;
+        }
+        if(!l.equalsIgnoreCase("")) {
+            this.lecturer = l;
+        }else{
+            this.lecturer = this._defautl_lecturer;
+        }
+        if(max < 10){
+            this.max_students = this._default_max_students;
+        }else {
+            this.max_students = max;
+        }
         this.no_students = 0;
     }
 
@@ -55,7 +59,6 @@ public class Course {
         if(course_name.equalsIgnoreCase("")) return;
 
         this.course_name = course_name;
-
     }
 
     public String getCourse_id() {
@@ -69,7 +72,6 @@ public class Course {
         if(!this.isValidCourse_id(course_id)) return;
 
         this.course_id = course_id;
-
     }
 
     // implement the other get and set methods here

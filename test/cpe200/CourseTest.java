@@ -10,7 +10,6 @@ public class CourseTest {
 
     private Course c;
 
-
     @Test
     public void defaultConstructor() throws Exception {
         c = new Course();
